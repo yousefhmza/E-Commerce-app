@@ -1,9 +1,11 @@
-import 'package:ecommerce/core/view_model/home_view_model.dart';
-import 'package:ecommerce/view/constants.dart';
-import 'package:ecommerce/view/widgets/custom_text.dart';
+import 'package:ecommerce/view/details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import 'package:ecommerce/core/view_model/home_view_model.dart';
+import 'package:ecommerce/view/constants.dart';
+import 'package:ecommerce/view/widgets/custom_text.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -11,9 +13,9 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeViewModel>(
+      init: Get.put(HomeViewModel()),
       builder: (controller) {
         return Scaffold(
-
           body: controller.isLoading.value
               ? const Center(
                   child: CircularProgressIndicator(
@@ -29,7 +31,7 @@ class HomeView extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        SearchTextFormField(),
+                        const SearchTextFormField(),
                         SizedBox(height: 30.0.h),
                         CustomText(
                           text: "Categories",
@@ -37,7 +39,7 @@ class HomeView extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                         SizedBox(height: 20.0.h),
-                        CategoryListView(),
+                        const CategoryListView(),
                         SizedBox(height: 30.0.h),
                         Row(
                           children: [
@@ -54,7 +56,7 @@ class HomeView extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 20.0.h),
-                        ProductsListView(),
+                        const ProductsListView(),
                       ],
                     ),
                   ),
@@ -93,37 +95,42 @@ class CategoryListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeViewModel>(builder: (controller) {
-      return SizedBox(
-        height: 100.0.h,
-        child: ListView.separated(
-          scrollDirection: Axis.horizontal,
-          itemCount: controller.categModel!.categories.length,
-          separatorBuilder: (context, index) => SizedBox(width: 16.0.w),
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                Container(
-                  height: 60.0.h,
-                  width: 100.0.w,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
-                    borderRadius: BorderRadius.circular(20.0.r),
-                  ),
-                  child: Image.network(
-                      controller.categModel!.categories[index].image),
+    return GetBuilder<HomeViewModel>(
+      init: HomeViewModel(),
+      builder: (controller) {
+        return controller.isLoading.value
+            ? const CircularProgressIndicator()
+            : SizedBox(
+                height: 100.0.h,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: controller.categModel!.categories.length,
+                  separatorBuilder: (context, index) => SizedBox(width: 16.0.w),
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Container(
+                          height: 60.0.h,
+                          width: 100.0.w,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade100,
+                            borderRadius: BorderRadius.circular(20.0.r),
+                          ),
+                          child: Image.network(
+                              controller.categModel!.categories[index].image),
+                        ),
+                        SizedBox(height: 15.0.h),
+                        CustomText(
+                          text: controller.categModel!.categories[index].name,
+                          fontSize: 12.0.sp,
+                        ),
+                      ],
+                    );
+                  },
                 ),
-                SizedBox(height: 15.0.h),
-                CustomText(
-                  text: controller.categModel!.categories[index].name,
-                  fontSize: 12.0.sp,
-                ),
-              ],
-            );
-          },
-        ),
-      );
-    });
+              );
+      },
+    );
   }
 }
 
@@ -132,58 +139,72 @@ class ProductsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 350.0.h,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: 15,
-        separatorBuilder: (context, index) => SizedBox(width: 16.0.w),
-        itemBuilder: (context, index) {
+    return GetBuilder<HomeViewModel>(
+        //init: HomeViewModel(),
+        builder: (controller) {
           return SizedBox(
-            width: 165.0.w,
-            child: Column(
-              children: [
-                Container(
-                  width: 165.0.w,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
-                    borderRadius: BorderRadius.circular(10.0.r),
-                  ),
-                  child: Column(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0.r),
-                        child: Image.asset(
-                          "assets/images/facebook icon.png",
-                          height: 250.0.h,
-                          fit: BoxFit.cover,
+            height: 350.0.h,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: controller.prodModel!.products.length,
+              separatorBuilder: (context, index) => SizedBox(width: 16.0.w),
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    Get.to(() =>
+                        DetailsView(controller.prodModel!.products[index]));
+                  },
+                  child: SizedBox(
+                    width: 165.0.w,
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 165.0.w,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade100,
+                            borderRadius: BorderRadius.circular(10.0.r),
+                          ),
+                          child: Column(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(10.0.r),
+                                child: Image.network(
+                                  controller.prodModel!.products[index].image,
+                                  height: 250.0.h,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 10.0.h),
+                        CustomText(
+                          text: controller.prodModel!.products[index].name,
+                          fontSize: 16.0.sp,
+                        ),
+                        SizedBox(height: 10.0.h),
+                        CustomText(
+                          text:
+                              controller.prodModel!.products[index].description,
+                          fontSize: 12.0.sp,
+                          color: Colors.grey,
+                          maxLines: 1,
+                          textOverflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(height: 10.0.h),
+                        CustomText(
+                          text:
+                              "\$${controller.prodModel!.products[index].price}",
+                          fontSize: 12.0.sp,
+                          color: primaryColor,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(height: 10.0.h),
-                CustomText(
-                  text: "BeoPlay Speaker",
-                  fontSize: 16.0.sp,
-                ),
-                SizedBox(height: 10.0.h),
-                CustomText(
-                  text: "Bang and Olufsen",
-                  fontSize: 12.0.sp,
-                  color: Colors.grey,
-                ),
-                SizedBox(height: 10.0.h),
-                CustomText(
-                  text: "\$775",
-                  fontSize: 12.0.sp,
-                  color: primaryColor,
-                ),
-              ],
+                );
+              },
             ),
           );
-        },
-      ),
-    );
+        });
   }
 }

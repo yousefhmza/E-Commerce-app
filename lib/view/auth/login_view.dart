@@ -1,4 +1,3 @@
-import 'package:ecommerce/view/auth/register_view.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +8,7 @@ import 'package:ecommerce/view/widgets/custom_button_social.dart';
 import 'package:ecommerce/view/widgets/custom_text_form_field.dart';
 import 'package:ecommerce/view/widgets/custom_text.dart';
 import 'package:ecommerce/view/constants.dart';
+import 'package:ecommerce/view/auth/register_view.dart';
 
 class LoginView extends GetWidget<AuthViewModel> {
   final FocusNode _focusNode = FocusNode();

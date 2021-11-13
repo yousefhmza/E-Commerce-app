@@ -11,4 +11,8 @@ class FirestoreUser {
         .doc(userModel.userId)
         .set(userModel.toJson());
   }
+
+  Future<DocumentSnapshot> getCurrentUser(String uid) async {
+    return await _usersCollectionRef.doc(uid).get();
+  }
 }

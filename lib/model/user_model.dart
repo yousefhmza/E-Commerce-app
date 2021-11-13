@@ -11,7 +11,7 @@ class UserModel {
     required this.pic,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
+  factory UserModel.fromJson(var json) {
     return UserModel(
       userId: json["userId"],
       email: json["email"],

@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce/core/services/firestore_user.dart';
+import 'package:ecommerce/helper/local_storage_data.dart';
 import 'package:ecommerce/model/user_model.dart';
+import 'package:ecommerce/view/control_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
@@ -16,10 +19,16 @@ class AuthViewModel extends GetxController {
 
   String? get user => _user.value?.email!;
 
+  final LocalStorageData localStorageData = Get.find();
+
   @override
   void onInit() {
     super.onInit();
     _user.bindStream(_firebaseAuth.authStateChanges());
+
+    if (_firebaseAuth.currentUser != null) {
+      getCurrentUserData(_firebaseAuth.currentUser!.uid);
+    }
   }
 
   void googleSignIn() async {
@@ -61,14 +70,20 @@ class AuthViewModel extends GetxController {
 
   void signIn() async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      UserCredential? user = await _firebaseAuth
+          .signInWithEmailAndPassword(
         email: email!,
         password: password!,
-      );
-      Get.offAll(HomeView());
+      )
+          .then((value) {
+        getCurrentUserData(value.user!.uid);
+      });
+      Get.offAll(() => const ControlView());
     } on FirebaseAuthException catch (e) {
+      print(e);
       Get.snackbar("Error While Login", e.toString());
     } catch (e) {
+      print(e);
       Get.snackbar("Error While Login", e.toString());
     }
   }
@@ -88,15 +103,25 @@ class AuthViewModel extends GetxController {
     }
   }
 
+  void getCurrentUserData(String uid) async {
+    await FirestoreUser().getCurrentUser(uid).then((value) {
+      setUser(UserModel.fromJson(value.data()));
+    });
+  }
+
   void saveUser(UserCredential credential) async {
-    await FirestoreUser().addUserToFirestore(
-      UserModel(
-        userId: credential.user!.uid,
-        email: credential.user!.email!,
-        name: name == null ? credential.user!.displayName! : name!,
-        pic: "",
-      ),
+    UserModel userModel = UserModel(
+      userId: credential.user!.uid,
+      email: credential.user!.email!,
+      name: name == null ? credential.user!.displayName! : name!,
+      pic: "",
     );
-    Get.offAll(HomeView());
+    await FirestoreUser().addUserToFirestore(userModel);
+    setUser(userModel);
+    Get.offAll(() => const ControlView());
+  }
+
+  void setUser(UserModel userModel) async {
+    await localStorageData.setUser(userModel);
   }
 }

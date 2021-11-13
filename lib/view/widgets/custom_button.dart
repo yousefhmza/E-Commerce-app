@@ -5,7 +5,7 @@ import 'package:ecommerce/view/constants.dart';
 import 'package:ecommerce/view/widgets/custom_text.dart';
 
 class CustomButton extends StatelessWidget {
-  final Function() onPressed;
+  final void Function() onPressed;
   final String text;
 
   const CustomButton({

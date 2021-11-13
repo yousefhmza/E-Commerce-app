@@ -14,6 +14,7 @@ class ControlView extends GetWidget<AuthViewModel> {
       () => Get.find<AuthViewModel>().user == null
           ? LoginView()
           : GetBuilder<ControlViewModel>(
+              init: Get.put(ControlViewModel()),
               builder: (controller) {
                 return Scaffold(
                   body: controller.currentScreen,
@@ -31,7 +32,7 @@ class BNB extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ControlViewModel>(
-      init: ControlViewModel(),
+      init: Get.find(),
       builder: (controller) {
         return BottomNavigationBar(
           currentIndex: controller.navigatorIndex,
