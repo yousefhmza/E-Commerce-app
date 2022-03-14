@@ -14,7 +14,6 @@ class ControlView extends GetWidget<AuthViewModel> {
       () => Get.find<AuthViewModel>().user == null
           ? LoginView()
           : GetBuilder<ControlViewModel>(
-              init: Get.put(ControlViewModel()),
               builder: (controller) {
                 return Scaffold(
                   body: controller.currentScreen,
@@ -32,7 +31,6 @@ class BNB extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ControlViewModel>(
-      init: Get.find(),
       builder: (controller) {
         return BottomNavigationBar(
           currentIndex: controller.navigatorIndex,
@@ -42,17 +40,26 @@ class BNB extends StatelessWidget {
           elevation: 0.0,
           items: [
             BottomNavigationBarItem(
-              activeIcon: const Text("Explore"),
+              activeIcon: const Text(
+                "الرئيسية",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               icon: Image.asset("assets/images/Icon_Explore.png"),
               label: "",
             ),
             BottomNavigationBarItem(
-              activeIcon: const Text("Cart"),
+              activeIcon: const Text(
+                "العربة",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               icon: Image.asset("assets/images/Icon_Cart.png"),
               label: "",
             ),
             BottomNavigationBarItem(
-              activeIcon: const Text("User"),
+              activeIcon: const Text(
+                "الملف الشخصي",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               icon: Image.asset("assets/images/Icon_User.png"),
               label: "",
             ),

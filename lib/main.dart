@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: lightTheme(),
         home: const ControlView(),
+        textDirection: TextDirection.rtl,
       ),
     );
   }

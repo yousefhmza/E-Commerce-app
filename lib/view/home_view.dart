@@ -34,7 +34,7 @@ class HomeView extends StatelessWidget {
                         const SearchTextFormField(),
                         SizedBox(height: 30.0.h),
                         CustomText(
-                          text: "Categories",
+                          text: "الأقسام",
                           fontSize: 18.0.sp,
                           fontWeight: FontWeight.bold,
                         ),
@@ -44,13 +44,13 @@ class HomeView extends StatelessWidget {
                         Row(
                           children: [
                             CustomText(
-                              text: "Best Selling",
+                              text: "الأكثر مبيعا",
                               fontSize: 18.0.sp,
                               fontWeight: FontWeight.bold,
                             ),
                             const Spacer(),
                             CustomText(
-                              text: "See All",
+                              text: "مشاهدة الكل",
                               fontSize: 16.0.sp,
                             ),
                           ],
@@ -110,14 +110,21 @@ class CategoryListView extends StatelessWidget {
                     return Column(
                       children: [
                         Container(
-                          height: 60.0.h,
-                          width: 100.0.w,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 25.0.w,
+                            vertical: 15.0.h,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.grey.shade100,
                             borderRadius: BorderRadius.circular(20.0.r),
                           ),
-                          child: Image.network(
-                              controller.categModel!.categories[index].image),
+                          child: SizedBox(
+                            width: 30.0.w,
+                            height: 30.0.h,
+                            child: Image.network(
+                              controller.categModel!.categories[index].image,
+                            ),
+                          ),
                         ),
                         SizedBox(height: 15.0.h),
                         CustomText(
@@ -142,69 +149,67 @@ class ProductsListView extends StatelessWidget {
     return GetBuilder<HomeViewModel>(
         //init: HomeViewModel(),
         builder: (controller) {
-          return SizedBox(
-            height: 350.0.h,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: controller.prodModel!.products.length,
-              separatorBuilder: (context, index) => SizedBox(width: 16.0.w),
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    Get.to(() =>
-                        DetailsView(controller.prodModel!.products[index]));
-                  },
-                  child: SizedBox(
-                    width: 165.0.w,
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 165.0.w,
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade100,
-                            borderRadius: BorderRadius.circular(10.0.r),
-                          ),
-                          child: Column(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(10.0.r),
-                                child: Image.network(
-                                  controller.prodModel!.products[index].image,
-                                  height: 250.0.h,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 10.0.h),
-                        CustomText(
-                          text: controller.prodModel!.products[index].name,
-                          fontSize: 16.0.sp,
-                        ),
-                        SizedBox(height: 10.0.h),
-                        CustomText(
-                          text:
-                              controller.prodModel!.products[index].description,
-                          fontSize: 12.0.sp,
-                          color: Colors.grey,
-                          maxLines: 1,
-                          textOverflow: TextOverflow.ellipsis,
-                        ),
-                        SizedBox(height: 10.0.h),
-                        CustomText(
-                          text:
-                              "\$${controller.prodModel!.products[index].price}",
-                          fontSize: 12.0.sp,
-                          color: primaryColor,
-                        ),
-                      ],
-                    ),
-                  ),
-                );
+      return SizedBox(
+        height: 360.0.h,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          itemCount: controller.prodModel!.products.length,
+          separatorBuilder: (context, index) => SizedBox(width: 16.0.w),
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                Get.to(
+                    () => DetailsView(controller.prodModel!.products[index]));
               },
-            ),
-          );
-        });
+              child: SizedBox(
+                width: 165.0.w,
+                child: Column(
+                  children: [
+                    Container(
+                      width: 165.0.w,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade100,
+                        borderRadius: BorderRadius.circular(10.0.r),
+                      ),
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0.r),
+                            child: Image.network(
+                              controller.prodModel!.products[index].image,
+                              height: 250.0.h,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 10.0.h),
+                    CustomText(
+                      text: controller.prodModel!.products[index].name,
+                      fontSize: 16.0.sp,
+                    ),
+                    SizedBox(height: 10.0.h),
+                    CustomText(
+                      text: controller.prodModel!.products[index].description,
+                      fontSize: 12.0.sp,
+                      color: Colors.grey,
+                      maxLines: 1,
+                      textOverflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: 10.0.h),
+                    CustomText(
+                      text: "${controller.prodModel!.products[index].price} ج.م ",
+                      fontSize: 12.0.sp,
+                      color: primaryColor,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      );
+    });
   }
 }

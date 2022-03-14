@@ -29,7 +29,7 @@ class CartView extends StatelessWidget {
                       ),
                       SizedBox(height: 20.0.h),
                       CustomText(
-                        text: "Empty Cart",
+                        text: "العربة خالية الان",
                         fontSize: 20.0.sp,
                         alignment: AlignmentDirectional.center,
                       ),
@@ -142,7 +142,7 @@ class CartView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomText(
-                                  text: "TOTAl",
+                                  text: "الإجمالي",
                                   fontSize: 16.0.sp,
                                   color: Colors.grey,
                                 ),
@@ -150,7 +150,7 @@ class CartView extends StatelessWidget {
                                     init: Get.find(),
                                     builder: (controller) {
                                       return CustomText(
-                                        text: "\$ ${controller.totalPrice}",
+                                        text: " ${controller.totalPrice} ج.م ",
                                         fontSize: 20.0.sp,
                                         color: primaryColor,
                                       );
@@ -159,7 +159,7 @@ class CartView extends StatelessWidget {
                             ),
                             const Spacer(),
                             CustomButton(
-                              text: "CheckOut",
+                              text: "الدفع",
                               onPressed: () {
                                 Get.to(() => CheckoutView());
                               },

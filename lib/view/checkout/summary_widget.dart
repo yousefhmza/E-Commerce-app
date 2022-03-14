@@ -11,49 +11,43 @@ class Summary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CartViewModel>(builder: (controller) {
-      return Padding(
+      return ListView.separated(
+        primary: false,
+        shrinkWrap: true,
         padding: EdgeInsets.all(16.0.w),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 200.0.h,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => SizedBox(
-                  height: 200,
-                  width: 150,
-                  child: Column(
-                    children: [
-                      Image.network(
-                        controller.cartProductsList[index].image,
-                        fit: BoxFit.fill,
-                        height: 120.0.h,
-                        width: 150.0.w,
-                      ),
-                      SizedBox(height: 10.0.h),
-                      CustomText(
-                        text: controller.cartProductsList[index].name,
-                        fontSize: 14.0.sp,
-                        textOverflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                      SizedBox(height: 10.0.h),
-                      CustomText(
-                        text: "\$ ${controller.cartProductsList[index].price}",
-                        fontSize: 14.0.sp,
-                        textOverflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        color: primaryColor,
-                      )
-                    ],
-                  ),
-                ),
-                separatorBuilder: (context, index) => SizedBox(width: 10.0.w),
-                itemCount: controller.cartProductsList.length,
+        itemBuilder: (context, index) => SizedBox(
+          height: 200,
+          width: 150,
+          child: Column(
+            children: [
+              Image.network(
+                controller.cartProductsList[index].image,
+                fit: BoxFit.fill,
+                height: 120.0.h,
+                width: 150.0.w,
               ),
-            )
-          ],
+              SizedBox(height: 10.0.h),
+              CustomText(
+                text: controller.cartProductsList[index].name,
+                fontSize: 14.0.sp,
+                textOverflow: TextOverflow.ellipsis,
+                alignment: AlignmentDirectional.center,
+                maxLines: 1,
+              ),
+              SizedBox(height: 10.0.h),
+              CustomText(
+                text: "${controller.cartProductsList[index].price} ج.م ",
+                fontSize: 14.0.sp,
+                textOverflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                alignment: AlignmentDirectional.center,
+                color: primaryColor,
+              )
+            ],
+          ),
         ),
+        separatorBuilder: (context, index) => SizedBox(width: 10.0.w),
+        itemCount: controller.cartProductsList.length,
       );
     });
   }

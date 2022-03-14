@@ -44,9 +44,9 @@ class AuthViewModel extends GetxController {
           await _firebaseAuth.signInWithCredential(credentials);
       saveUser(credential);
     } on FirebaseAuthException catch (e) {
-      Get.snackbar("Error While Login", e.toString());
+      Get.snackbar("حدث خطأ ما", e.toString());
     } catch (e) {
-      Get.snackbar("Error While Login", e.toString());
+      Get.snackbar("حدث خطأ ما", e.toString());
     }
   }
 
@@ -62,9 +62,9 @@ class AuthViewModel extends GetxController {
         saveUser(credential);
       }
     } on FirebaseAuthException catch (e) {
-      Get.snackbar("Error While Login", e.toString());
+      Get.snackbar("حدث خطأ ما", e.toString());
     } catch (e) {
-      Get.snackbar("Error While Login", e.toString());
+      Get.snackbar("حدث خطأ ما", e.toString());
     }
   }
 
@@ -72,7 +72,7 @@ class AuthViewModel extends GetxController {
     try {
       UserCredential? user = await _firebaseAuth
           .signInWithEmailAndPassword(
-        email: email!,
+        email: email!.toLowerCase().trim(),
         password: password!,
       )
           .then((value) {
@@ -81,10 +81,10 @@ class AuthViewModel extends GetxController {
       Get.offAll(() => const ControlView());
     } on FirebaseAuthException catch (e) {
       print(e);
-      Get.snackbar("Error While Login", e.toString());
+      Get.snackbar("حدث خطأ ما", e.toString());
     } catch (e) {
       print(e);
-      Get.snackbar("Error While Login", e.toString());
+      Get.snackbar("حدث خطأ ما", e.toString());
     }
   }
 
@@ -92,14 +92,14 @@ class AuthViewModel extends GetxController {
     try {
       UserCredential credential =
           await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email!,
+        email: email!.toLowerCase().trim(),
         password: password!,
       );
       saveUser(credential);
     } on FirebaseAuthException catch (e) {
-      Get.snackbar("Error While Login", e.toString());
+      Get.snackbar("حدث خطأ ما", e.toString());
     } catch (e) {
-      Get.snackbar("Error While Login", e.toString());
+      Get.snackbar("حدث خطأ ما", e.toString());
     }
   }
 
@@ -112,7 +112,7 @@ class AuthViewModel extends GetxController {
   void saveUser(UserCredential credential) async {
     UserModel userModel = UserModel(
       userId: credential.user!.uid,
-      email: credential.user!.email!,
+      email: credential.user!.email!.toLowerCase(),
       name: name == null ? credential.user!.displayName! : name!,
       pic: "",
     );

@@ -24,32 +24,32 @@ class ProfileView extends StatelessWidget {
 
   final List<MenuItemModel> _items = [
     MenuItemModel(
-      title: "Edit Profile",
+      title: "تعديل الملف الشخصي",
       image: "assets/menu_icons/Icon_Edit-Profile.png",
       onTap: () {},
     ),
     MenuItemModel(
-      title: "Shipping address",
+      title: "عنوان الشحن",
       image: "assets/menu_icons/Icon_Location.png",
       onTap: () {},
     ),
     MenuItemModel(
-      title: "Order History",
+      title: "سجل الشراء",
       image: "assets/menu_icons/Icon_History.png",
       onTap: () {},
     ),
     MenuItemModel(
-      title: "Cards",
+      title: "البطاقات الإئتمانية",
       image: "assets/menu_icons/Icon_Payment.png",
       onTap: () {},
     ),
     MenuItemModel(
-      title: "Notifications",
+      title: "الإشعارات",
       image: "assets/menu_icons/Icon_Alert.png",
       onTap: () {},
     ),
     MenuItemModel(
-      title: "Log Out",
+      title: "تسجيل الخروج",
       image: "assets/menu_icons/Icon_Exit.png",
       onTap: () {
         profileViewModel.signOut();

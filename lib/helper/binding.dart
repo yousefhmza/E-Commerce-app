@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/view_model/details_view_model.dart';
 import 'package:get/get.dart';
 
 import 'package:ecommerce/core/view_model/profile_view_model.dart';
@@ -18,5 +19,6 @@ class Binding extends Bindings {
     Get.lazyPut(() => LocalStorageData());
     Get.lazyPut(() => ProfileViewModel());
     Get.lazyPut(() => CheckoutViewModel());
+    Get.lazyPut(() => DetailsViewModel(),fenix: true);
   }
 }

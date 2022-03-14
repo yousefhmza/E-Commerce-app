@@ -16,72 +16,75 @@ class _DeliveryTimeState extends State<DeliveryTime> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          SizedBox(height: 50.0.h),
-          RadioListTile<Delivery>(
-            value: Delivery.standard,
-            groupValue: delivery,
-            onChanged: (value) {
-              setState(() {
-                delivery = value!;
-              });
-            },
-            title: CustomText(
-              text: "Standard Delivery",
+    return Column(
+      children: [
+        SizedBox(height: 50.0.h),
+        RadioListTile<Delivery>(
+          value: Delivery.standard,
+          groupValue: delivery,
+          onChanged: (value) {
+            setState(() {
+              delivery = value!;
+            });
+          },
+          title: Text(
+            "توصيل عادي",
+            style: TextStyle(
               fontSize: 22.0.sp,
             ),
-            subtitle: CustomText(
-              text: "\nOrder will be delivered between 3 - 5 business days",
+          ),
+          subtitle: Text(
+            "\nيصل الطلب في فترة من 3-5 أيام عمل",
+            style: TextStyle(
               fontSize: 16.0.sp,
               color: Colors.grey,
             ),
-            activeColor: primaryColor,
           ),
-          SizedBox(height: 20.0.h),
-          RadioListTile<Delivery>(
-            value: Delivery.nextDay,
-            groupValue: delivery,
-            onChanged: (value) {
-              setState(() {
-                delivery = value!;
-              });
-            },
-            title: CustomText(
-              text: "Next Day Delivery",
-              fontSize: 22.0.sp,
-            ),
-            subtitle: CustomText(
-              text:
-                  "\nPlace your order before 6pm and your items will be delivered the next day",
-              fontSize: 16.0.sp,
-              color: Colors.grey,
-            ),
-            activeColor: primaryColor,
+          activeColor: primaryColor,
+        ),
+        SizedBox(height: 20.0.h),
+        RadioListTile<Delivery>(
+          value: Delivery.nextDay,
+          groupValue: delivery,
+          onChanged: (value) {
+            setState(() {
+              delivery = value!;
+            });
+          },
+          title: CustomText(
+            text: "توصيل في اليوم التالي",
+            fontSize: 22.0.sp,
           ),
-          SizedBox(height: 20.0.h),
-          RadioListTile<Delivery>(
-            value: Delivery.eliminated,
-            groupValue: delivery,
-            onChanged: (value) {
-              setState(() {
-                delivery = value!;
-              });            },
-            title: CustomText(
-              text: "Nominated Delivery",
-              fontSize: 22.0.sp,
-            ),
-            subtitle: CustomText(
-              text:
-                  "\nPick a particular date from the calendar and order will be delivered on selected date",
-              fontSize: 16.0.sp,
-              color: Colors.grey,
-            ),
-            activeColor: primaryColor,
+          subtitle: CustomText(
+            text:
+                "\nقم بالطلب قبل السادسة مساء و سيصلك الطلب في اليوم التالي",
+            fontSize: 16.0.sp,
+            color: Colors.grey,
           ),
-        ],
-      ),
+          activeColor: primaryColor,
+        ),
+        SizedBox(height: 20.0.h),
+        RadioListTile<Delivery>(
+          value: Delivery.eliminated,
+          groupValue: delivery,
+          onChanged: (value) {
+            setState(() {
+              delivery = value!;
+            });
+          },
+          title: CustomText(
+            text: "توصيل اختياري",
+            fontSize: 22.0.sp,
+          ),
+          subtitle: CustomText(
+            text:
+                "\nاختر تاريخ التوصيل بنفسك",
+            fontSize: 16.0.sp,
+            color: Colors.grey,
+          ),
+          activeColor: primaryColor,
+        ),
+      ],
     );
   }
 }

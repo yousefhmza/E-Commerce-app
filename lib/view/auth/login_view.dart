@@ -39,7 +39,7 @@ class LoginView extends GetWidget<AuthViewModel> {
                   Row(
                     children: [
                       CustomText(
-                        text: "Welcome,",
+                        text: "مرحبا,",
                         fontSize: 28.0.sp,
                         fontWeight: FontWeight.bold,
                       ),
@@ -49,7 +49,7 @@ class LoginView extends GetWidget<AuthViewModel> {
                           Get.to(() => RegisterView());
                         },
                         child: CustomText(
-                          text: "Sign Up",
+                          text: "تسجيل الدخول",
                           color: primaryColor,
                           fontSize: 16.0.sp,
                         ),
@@ -58,13 +58,13 @@ class LoginView extends GetWidget<AuthViewModel> {
                   ),
                   SizedBox(height: 10.0.h),
                   CustomText(
-                    text: "Sign In To Continue",
+                    text: "قم بالتسجيل للإستمرار",
                     color: Colors.grey,
                     fontSize: 12.0.sp,
                   ),
                   SizedBox(height: 50.0.h),
                   CustomTextFormField(
-                    text: "Email",
+                    text: "البريد الإلكتروني",
                     hintText: "iamdavid@gmail.com",
                     onSaved: (value) {
                       controller.email = value!;
@@ -73,32 +73,32 @@ class LoginView extends GetWidget<AuthViewModel> {
                       if (value == null ||
                           value.isEmpty ||
                           !value.contains("@")) {
-                        return "Please enter a valid value";
+                        return "قم بإدخال قيمة صحيحه";
                       }
                     },
                   ),
                   SizedBox(height: 30.0.h),
                   CustomTextFormField(
-                    text: "Password",
+                    text: "كلمة المرور",
                     hintText: "**************",
                     onSaved: (value) {
                       controller.password = value;
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty || value.length < 8) {
-                        return "Please enter a valid password with characters more than 8";
+                        return "قم بإدخال كلمة مرور تزيد عن 8 أحرف";
                       }
                     },
                   ),
                   SizedBox(height: 20.0.h),
                   CustomText(
-                    text: "Forget Password ?",
+                    text: "نسيت كلمة المرور؟",
                     fontSize: 12.0.sp,
                     alignment: AlignmentDirectional.topEnd,
                   ),
                   SizedBox(height: 20.0.h),
                   CustomButton(
-                    text: "SIGN IN",
+                    text: "التسجيل",
                     onPressed: () {
                       _formKey.currentState!.save();
                       if (_formKey.currentState!.validate()) {
@@ -108,7 +108,7 @@ class LoginView extends GetWidget<AuthViewModel> {
                   ),
                   SizedBox(height: 30.0.h),
                   CustomText(
-                    text: "-OR-",
+                    text: "-أو-",
                     fontSize: 16.0.sp,
                     alignment: AlignmentDirectional.center,
                   ),
@@ -117,7 +117,7 @@ class LoginView extends GetWidget<AuthViewModel> {
                     onPressed: () {
                       controller.facebookSignIn();
                     },
-                    text: "Sign In With Facebook",
+                    text: "تسجيل الدخول بفيسبوك",
                     imageName: "facebook icon.png",
                   ),
                   SizedBox(height: 20.0.h),
@@ -125,9 +125,10 @@ class LoginView extends GetWidget<AuthViewModel> {
                     onPressed: () {
                       controller.googleSignIn();
                     },
-                    text: "Sign In With Google",
+                    text: "تسجيل الدخول بجوجل",
                     imageName: "google icon.png",
                   ),
+                  SizedBox(height: 20.0.h),
                 ],
               ),
             ),

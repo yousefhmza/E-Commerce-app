@@ -23,7 +23,7 @@ class CheckoutView extends StatelessWidget {
           appBar: AppBar(
             centerTitle: true,
             title: CustomText(
-              text: "CheckOut",
+              text: "الدفع",
               fontSize: 18.0.sp,
             ),
           ),
@@ -42,7 +42,7 @@ class CheckoutView extends StatelessWidget {
                       steps: [
                         Step(
                           title: CustomText(
-                            text: "Delivery",
+                            text: "التوصيل",
                             fontSize: 16.0.sp,
                           ),
                           content: Container(),
@@ -53,7 +53,7 @@ class CheckoutView extends StatelessWidget {
                         ),
                         Step(
                           title: CustomText(
-                            text: "Address",
+                            text: "العنوان",
                             fontSize: 16.0.sp,
                           ),
                           content: Container(),
@@ -64,7 +64,7 @@ class CheckoutView extends StatelessWidget {
                         ),
                         Step(
                           title: CustomText(
-                            text: "Summary",
+                            text: "النتيجة",
                             fontSize: 16.0.sp,
                           ),
                           content: Container(),

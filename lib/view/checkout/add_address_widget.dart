@@ -28,19 +28,19 @@ class AddAddress extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
-                    text: "Billing address is the same as delivery address",
+                    text: "عنوان الشحن هو نفسه عنوان التوصيل",
                     fontSize: 16.0.sp,
                   ),
                   SizedBox(height: 30.0.h),
                   CustomTextFormField(
-                    text: "Street 1",
-                    hintText: "21, Alex Davidson Avenue",
+                    text: "المحافظة",
+                    hintText: "القاهرة",
                     onSaved: (value) {
                       controller.street1 = value;
                     },
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Please Enter Your Street Address";
+                        return "قم بإدخال المحافظة";
                       } else {
                         return null;
                       }
@@ -48,14 +48,14 @@ class AddAddress extends StatelessWidget {
                   ),
                   SizedBox(height: 30.0.h),
                   CustomTextFormField(
-                    text: "Street 2",
-                    hintText: "Opposite Omegatron, Vicent Quarters",
+                    text: "العنوان",
+                    hintText: "23 شارع المعز",
                     onSaved: (value) {
                       controller.street2 = value;
                     },
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Please Enter Your Street Address";
+                        return "قم بإدخال العنوان";
                       } else {
                         return null;
                       }
@@ -63,8 +63,8 @@ class AddAddress extends StatelessWidget {
                   ),
                   SizedBox(height: 30.0.h),
                   CustomTextFormField(
-                    text: "City",
-                    hintText: "Victoria Island",
+                    text: "المدينة",
+                    hintText: "القاهرة القديمة",
                     onSaved: (value) {
                       controller.city = value;
                     },
@@ -77,43 +77,43 @@ class AddAddress extends StatelessWidget {
                     },
                   ),
                   SizedBox(height: 30.0.h),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: CustomTextFormField(
-                          text: "State",
-                          hintText: "Lagos",
-                          onSaved: (value) {
-                            controller.state = value;
-                          },
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Please Enter Your State";
-                            } else {
-                              return null;
-                            }
-                          },
-                        ),
-                      ),
-                      SizedBox(width: 10.0.w),
-                      Expanded(
-                        child: CustomTextFormField(
-                          text: "Country",
-                          hintText: "Nigeria",
-                          onSaved: (value) {
-                            controller.country = value;
-                          },
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Please Enter Your Country";
-                            } else {
-                              return null;
-                            }
-                          },
-                        ),
-                      )
-                    ],
-                  )
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: CustomTextFormField(
+                  //         text: "State",
+                  //         hintText: "Lagos",
+                  //         onSaved: (value) {
+                  //           controller.state = value;
+                  //         },
+                  //         validator: (value) {
+                  //           if (value!.isEmpty) {
+                  //             return "Please Enter Your State";
+                  //           } else {
+                  //             return null;
+                  //           }
+                  //         },
+                  //       ),
+                  //     ),
+                  //     SizedBox(width: 10.0.w),
+                  //     Expanded(
+                  //       child: CustomTextFormField(
+                  //         text: "Country",
+                  //         hintText: "Nigeria",
+                  //         onSaved: (value) {
+                  //           controller.country = value;
+                  //         },
+                  //         validator: (value) {
+                  //           if (value!.isEmpty) {
+                  //             return "Please Enter Your Country";
+                  //           } else {
+                  //             return null;
+                  //           }
+                  //         },
+                  //       ),
+                  //     )
+                  //   ],
+                  // )
                 ],
               ),
             ),

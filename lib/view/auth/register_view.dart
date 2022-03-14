@@ -34,26 +34,26 @@ class RegisterView extends GetWidget<AuthViewModel> {
               child: Column(
                 children: [
                   CustomText(
-                    text: "Sign Up,",
+                    text: "تسجيل الدخول,",
                     fontSize: 28.0.sp,
                     fontWeight: FontWeight.bold,
                   ),
                   SizedBox(height: 50.0.h),
                   CustomTextFormField(
-                    text: "Name",
-                    hintText: "David Tom",
+                    text: "الإسم",
+                    hintText: "يوسف حمزه",
                     onSaved: (value) {
                       controller.name = value;
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Please enter a valid value";
+                        return "برجاء إدخال قيمه صحيحه";
                       }
                     },
                   ),
                   SizedBox(height: 30.0.h),
                   CustomTextFormField(
-                    text: "Email",
+                    text: "البريد الإلكتروني",
                     hintText: "iamdavid@gmail.com",
                     onSaved: (value) {
                       controller.email = value!;
@@ -62,27 +62,27 @@ class RegisterView extends GetWidget<AuthViewModel> {
                       if (value == null ||
                           value.isEmpty ||
                           !value.contains("@")) {
-                        return "Please enter a valid value";
+                        return "برجاء إدخال قيمه صحيحه";
                       }
                     },
                   ),
                   SizedBox(height: 30.0.h),
                   CustomTextFormField(
-                    text: "Password",
+                    text: "كلمة المرور",
                     hintText: "**************",
                     onSaved: (value) {
                       controller.password = value;
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty || value.length < 8) {
-                        return "Please enter a valid password with characters more than 8";
+                        return "قم بإدخال كلمة مرور تزيد عن 8 أحرف";
                       }
                     },
                   ),
                   SizedBox(height: 30.0.h),
 
                   CustomButton(
-                    text: "SIGN UP",
+                    text: "تسجيل الدخول",
                     onPressed: () {
                       _formKey.currentState!.save();
                       if (_formKey.currentState!.validate()) {
